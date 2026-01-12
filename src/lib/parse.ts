@@ -1,18 +1,26 @@
 import Parse from 'parse';
 
+// Back4App configuration
+const PARSE_CONFIG = {
+  appId: process.env.NEXT_PUBLIC_PARSE_APP_ID || 'UqKDfZOiOMHoWLJU304hzy09lPpvvIQzAeMRPf7Y',
+  jsKey: process.env.NEXT_PUBLIC_PARSE_JS_KEY || 'ZLKK52IEVjWoP4TO3NqGvRUcVH549UDQhvNP0IoH',
+  serverURL: process.env.NEXT_PUBLIC_PARSE_SERVER_URL || 'https://parseapi.back4app.com',
+};
+
 // Initialize Parse only on client side
 const initializeParse = () => {
-  if (typeof window !== 'undefined' && !Parse.applicationId) {
-    Parse.initialize(
-      process.env.NEXT_PUBLIC_PARSE_APP_ID!,
-      process.env.NEXT_PUBLIC_PARSE_JS_KEY!
-    );
-    (Parse as any).serverURL = process.env.NEXT_PUBLIC_PARSE_SERVER_URL!;
+  if (typeof window !== 'undefined') {
+    if (!Parse.applicationId) {
+      Parse.initialize(PARSE_CONFIG.appId, PARSE_CONFIG.jsKey);
+      (Parse as any).serverURL = PARSE_CONFIG.serverURL;
+    }
   }
 };
 
 // Initialize on import
-initializeParse();
+if (typeof window !== 'undefined') {
+  initializeParse();
+}
 
 export { Parse, initializeParse };
 
