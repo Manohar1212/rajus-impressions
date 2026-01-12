@@ -25,21 +25,35 @@ export default function AdminLayout({
         return;
       }
 
-      const isAuthenticated = await parseHelpers.isAuthenticated();
+      try {
+        const isAuthenticated = await parseHelpers.isAuthenticated();
 
-      if (!isAuthenticated) {
-        router.push('/admin/login');
-      } else {
-        const user = parseHelpers.getCurrentUser();
-        if (user) {
-          setUsername(user.get('username') || 'Admin');
+        if (!isAuthenticated) {
+          router.push('/admin/login');
+        } else {
+          const user = parseHelpers.getCurrentUser();
+          if (user) {
+            setUsername(user.get('username') || 'Admin');
+          }
+          setLoading(false);
         }
-        setLoading(false);
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        router.push('/admin/login');
       }
     };
 
+    // Add timeout to prevent infinite loading
+    const timeout = setTimeout(() => {
+      if (loading && pathname !== '/admin/login') {
+        router.push('/admin/login');
+      }
+    }, 5000);
+
     checkAuth();
-  }, [pathname, router]);
+
+    return () => clearTimeout(timeout);
+  }, [pathname, router, loading]);
 
   // Show login page without layout
   if (pathname === '/admin/login') {
