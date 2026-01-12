@@ -19,11 +19,12 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Prevent direct access to /admin routes from main domain (except in development)
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  if (!isAdminSubdomain && url.pathname.startsWith('/admin') && !isDevelopment) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
+  // Note: Direct /admin access is allowed for now
+  // To restrict to subdomain only, uncomment below:
+  // const isDevelopment = process.env.NODE_ENV === 'development';
+  // if (!isAdminSubdomain && url.pathname.startsWith('/admin') && !isDevelopment) {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
 
   return NextResponse.next();
 }
