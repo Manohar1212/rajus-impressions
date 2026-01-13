@@ -90,7 +90,9 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden lg:flex items-center gap-0.5 p-1 rounded-full transition-all duration-300 ${
+          <nav
+            aria-label="Main navigation"
+            className={`hidden lg:flex items-center gap-0.5 p-1 rounded-full transition-all duration-300 ${
             useScrolledStyle ? 'bg-muted/50' : 'bg-white/10 backdrop-blur-md'
           }`}>
             {navItems.map((item) => {
@@ -180,7 +182,7 @@ export function Navigation() {
                   </div>
 
                   {/* Mobile Navigation Links */}
-                  <nav className="flex flex-col p-2 flex-1">
+                  <nav aria-label="Mobile navigation" className="flex flex-col p-2 flex-1">
                     {navItems.map((item) => {
                       const isActive =
                         pathname === "/gallery"

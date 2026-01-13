@@ -67,11 +67,13 @@ export default function GalleryPage() {
           </div>
 
           {/* Category Pills */}
-          <div className="flex justify-center gap-2 pb-8">
+          <div className="flex justify-center gap-2 pb-8" role="group" aria-label="Filter gallery by category">
             {categories.map((category) => (
               <button
                 key={category}
+                type="button"
                 onClick={() => setActiveCategory(category)}
+                aria-pressed={activeCategory === category}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeCategory === category
                     ? "bg-foreground text-background shadow-lg"
@@ -95,10 +97,12 @@ export default function GalleryPage() {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
               {filteredItems.map((item, i) => (
-                <div
+                <button
+                  type="button"
                   key={item.id || `${item.title}-${i}`}
                   onClick={() => openLightbox(i)}
-                  className="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer bg-white shadow-sm hover:shadow-xl transition-all duration-500"
+                  aria-label={`View ${item.title} in lightbox`}
+                  className="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer bg-white shadow-sm hover:shadow-xl transition-all duration-500 text-left"
                 >
                   <Image
                     src={item.imagePath}
@@ -121,10 +125,10 @@ export default function GalleryPage() {
                   </div>
 
                   {/* Corner accent */}
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/0 group-hover:bg-white/90 flex items-center justify-center transition-all duration-300 scale-0 group-hover:scale-100">
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/0 group-hover:bg-white/90 flex items-center justify-center transition-all duration-300 scale-0 group-hover:scale-100" aria-hidden="true">
                     <ArrowRight className="h-4 w-4 text-foreground -rotate-45" />
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           )}

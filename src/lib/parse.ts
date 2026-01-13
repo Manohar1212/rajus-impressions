@@ -1,7 +1,5 @@
-// Use browser-specific Parse import
-const Parse = typeof window !== 'undefined'
-  ? require('parse/dist/parse.min.js')
-  : require('parse/node');
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import ParseLib from 'parse';
 
 // Back4App configuration
 const PARSE_CONFIG = {
@@ -10,15 +8,17 @@ const PARSE_CONFIG = {
   serverURL: 'https://parseapi.back4app.com',
 };
 
+const Parse: any = ParseLib;
+
 // Initialize Parse
 const initializeParse = () => {
-  if (!Parse.applicationId) {
+  if (Parse && !Parse.applicationId) {
     Parse.initialize(PARSE_CONFIG.appId, PARSE_CONFIG.jsKey);
     Parse.serverURL = PARSE_CONFIG.serverURL;
   }
 };
 
-// Initialize immediately
+// Initialize on load
 initializeParse();
 
 export { Parse, initializeParse };
@@ -29,7 +29,7 @@ export interface GalleryImageData {
   title: string;
   category: string;
   imagePath: string;
-  imageFile?: Parse.File;
+  imageFile?: unknown;
   featured: boolean;
   order: number;
 }
@@ -39,7 +39,7 @@ export interface ServiceData {
   title: string;
   description?: string;
   imagePath: string;
-  imageFile?: Parse.File;
+  imageFile?: unknown;
   order: number;
   active: boolean;
 }
@@ -74,7 +74,7 @@ export const parseHelpers = {
     const query = new Parse.Query('GalleryImage');
     query.ascending('order');
     const results = await query.find();
-    return results.map((item) => ({
+    return results.map((item: any) => ({
       id: item.id,
       title: item.get('title'),
       category: item.get('category'),
@@ -112,7 +112,7 @@ export const parseHelpers = {
     const query = new Parse.Query('Service');
     query.ascending('order');
     const results = await query.find();
-    return results.map((item) => ({
+    return results.map((item: any) => ({
       id: item.id,
       title: item.get('title'),
       description: item.get('description'),
@@ -143,7 +143,7 @@ export const parseHelpers = {
     const query = new Parse.Query('Testimonial');
     query.ascending('order');
     const results = await query.find();
-    return results.map((item) => ({
+    return results.map((item: any) => ({
       id: item.id,
       name: item.get('name'),
       location: item.get('location'),
@@ -183,7 +183,7 @@ export const parseHelpers = {
     const query = new Parse.Query('Inquiry');
     query.descending('createdAt');
     const results = await query.find();
-    return results.map((item) => ({
+    return results.map((item: any) => ({
       id: item.id,
       name: item.get('name'),
       phone: item.get('phone'),
@@ -234,7 +234,7 @@ export const parseHelpers = {
   },
 
   // Auth operations
-  async login(username: string, password: string): Promise<Parse.User> {
+  async login(username: string, password: string): Promise<any> {
     initializeParse();
     return Parse.User.logIn(username, password);
   },
@@ -244,7 +244,7 @@ export const parseHelpers = {
     await Parse.User.logOut();
   },
 
-  getCurrentUser(): Parse.User | null {
+  getCurrentUser(): any {
     initializeParse();
     return Parse.User.current() || null;
   },

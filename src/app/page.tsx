@@ -115,7 +115,7 @@ export default function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true">
           <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-2">
             <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
           </div>
@@ -332,17 +332,19 @@ export default function Home() {
               href={socialMedia.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow us on Instagram"
               className="p-3 rounded-xl bg-card border border-border/30 text-muted-foreground hover:text-[#E4405F] hover:border-[#E4405F]/30 transition-all duration-300"
             >
-              <InstagramIcon className="h-5 w-5" />
+              <InstagramIcon className="h-5 w-5" aria-hidden="true" />
             </a>
             <a
               href={socialMedia.facebook.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow us on Facebook"
               className="p-3 rounded-xl bg-card border border-border/30 text-muted-foreground hover:text-[#1877F2] hover:border-[#1877F2]/30 transition-all duration-300"
             >
-              <FacebookIcon className="h-5 w-5" />
+              <FacebookIcon className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
         </div>

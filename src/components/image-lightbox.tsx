@@ -47,11 +47,17 @@ export function ImageLightbox({
   const currentImage = images[currentIndex]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Image viewer: ${currentImage.alt}`}
+      className="fixed inset-0 z-50 flex items-center justify-center"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/95 backdrop-blur-sm"
         onClick={onClose}
+        aria-hidden="true"
       />
 
       {/* Close button */}
