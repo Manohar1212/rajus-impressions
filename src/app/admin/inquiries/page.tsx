@@ -124,9 +124,9 @@ export default function InquiriesManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Inquiries</h1>
+          <h1 className="text-3xl font-bold">Enquiries</h1>
           <p className="text-muted-foreground">
-            Manage customer inquiries and booking requests.
+            Manage customer enquiries and booking requests.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -177,7 +177,7 @@ export default function InquiriesManagementPage() {
       <Card>
         <CardHeader>
           <CardTitle>
-            {statusFilter === 'all' ? 'All Inquiries' : `${statusFilter} Inquiries`} (
+            {statusFilter === 'all' ? 'All Enquiries' : `${statusFilter} Enquiries`} (
             {filteredInquiries.length})
           </CardTitle>
         </CardHeader>
@@ -185,7 +185,7 @@ export default function InquiriesManagementPage() {
           {filteredInquiries.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No inquiries found.</p>
+              <p>No enquiries found.</p>
             </div>
           ) : (
             <Table>
@@ -243,7 +243,7 @@ export default function InquiriesManagementPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Inquiry Details</DialogTitle>
+            <DialogTitle>Enquiry Details</DialogTitle>
           </DialogHeader>
           {selectedInquiry && (
             <div className="space-y-4">
@@ -324,7 +324,7 @@ export default function InquiriesManagementPage() {
                     id="notes"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Add notes about this inquiry..."
+                    placeholder="Add notes about this enquiry..."
                     rows={3}
                     disabled={saving}
                   />

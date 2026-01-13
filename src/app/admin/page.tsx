@@ -90,13 +90,13 @@ export default function AdminDashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">New Inquiries</CardTitle>
+            <CardTitle className="text-sm font-medium">New Enquiries</CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.newInquiries}</div>
             <p className="text-xs text-muted-foreground">
-              {stats.inquiryCount} total inquiries
+              {stats.inquiryCount} total enquiries
             </p>
           </CardContent>
         </Card>
@@ -132,14 +132,14 @@ export default function AdminDashboard() {
         </Card>
       </div>
 
-      {/* Recent Inquiries */}
+      {/* Recent Enquiries */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Inquiries</CardTitle>
+          <CardTitle>Recent Enquiries</CardTitle>
         </CardHeader>
         <CardContent>
           {recentInquiries.length === 0 ? (
-            <p className="text-muted-foreground text-sm">No inquiries yet.</p>
+            <p className="text-muted-foreground text-sm">No enquiries yet.</p>
           ) : (
             <div className="space-y-4">
               {recentInquiries.map((inquiry) => (
@@ -174,7 +174,7 @@ export default function AdminDashboard() {
           )}
           <Link href="/admin/inquiries" className="block mt-4">
             <Button variant="outline" className="w-full">
-              View all inquiries
+              View all enquiries
             </Button>
           </Link>
         </CardContent>

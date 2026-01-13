@@ -20,7 +20,7 @@ const navItems = [
   { name: 'Gallery', href: '/admin/gallery', icon: Images },
   { name: 'Services', href: '/admin/content/services', icon: FileText },
   { name: 'Testimonials', href: '/admin/content/testimonials', icon: MessageSquare },
-  { name: 'Inquiries', href: '/admin/inquiries', icon: Settings },
+  { name: 'Enquiries', href: '/admin/inquiries', icon: Settings },
 ];
 
 export function AdminSidebar() {
