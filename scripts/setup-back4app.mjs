@@ -180,12 +180,12 @@ async function createInquiryClass() {
 
   const Inquiry = Parse.Object.extend('Inquiry');
 
-  // Create a sample inquiry to establish the class schema
+  // Create a sample enquiry to establish the class schema
   const inquiry = new Inquiry();
-  inquiry.set('name', 'Sample Inquiry');
+  inquiry.set('name', 'Sample Enquiry');
   inquiry.set('phone', '9876543210');
   inquiry.set('email', 'sample@example.com');
-  inquiry.set('message', 'This is a sample inquiry to set up the class schema.');
+  inquiry.set('message', 'This is a sample enquiry to set up the class schema.');
   inquiry.set('service', 'Hand Impressions');
   inquiry.set('status', 'completed');
   inquiry.set('notes', 'This is a sample - you can delete this entry.');
