@@ -106,23 +106,21 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
         {statCards.map((stat) => (
-          <Link key={stat.title} href={stat.href}>
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/30 cursor-pointer rounded-2xl border-border/50">
-              <CardContent className="p-6">
+          <Link key={stat.title} href={stat.href} className="block h-full">
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/30 cursor-pointer rounded-2xl border-border/50 h-full">
+              <CardContent className="p-6 h-full flex flex-col">
                 <div className="flex items-center justify-between">
                   <div className={`p-3 rounded-xl ${stat.color}`}>
                     <stat.icon className="h-5 w-5" />
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 flex-grow">
                   <p className="text-3xl font-bold">{stat.value}</p>
                   <p className="text-sm text-muted-foreground mt-1">{stat.title}</p>
-                  {stat.subtitle && (
-                    <p className="text-xs text-muted-foreground/70">{stat.subtitle}</p>
-                  )}
+                  <p className="text-xs text-muted-foreground/70 h-4">{stat.subtitle || ''}</p>
                 </div>
               </CardContent>
             </Card>
