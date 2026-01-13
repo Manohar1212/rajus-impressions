@@ -70,11 +70,11 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       <AdminSidebar />
-      <div className="lg:pl-64">
+      <div className="lg:pl-72">
         <AdminHeader username={username} />
-        <main className="p-6">{children}</main>
+        <main className="p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

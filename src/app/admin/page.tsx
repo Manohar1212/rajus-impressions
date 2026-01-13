@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { parseHelpers } from '@/lib/parse';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Images, MessageSquare, Star, FileText, Loader2 } from 'lucide-react';
+import { Images, Mail, Star, FileText, Loader2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -63,120 +63,127 @@ export default function AdminDashboard() {
     );
   }
 
+  const statCards = [
+    {
+      title: 'Gallery Images',
+      value: stats.galleryCount,
+      icon: Images,
+      href: '/admin/gallery',
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      title: 'New Enquiries',
+      value: stats.newInquiries,
+      subtitle: `${stats.inquiryCount} total`,
+      icon: Mail,
+      href: '/admin/inquiries',
+      color: 'bg-blue-500/10 text-blue-600',
+    },
+    {
+      title: 'Testimonials',
+      value: stats.testimonialCount,
+      icon: Star,
+      href: '/admin/content/testimonials',
+      color: 'bg-yellow-500/10 text-yellow-600',
+    },
+    {
+      title: 'Services',
+      value: stats.serviceCount,
+      icon: FileText,
+      href: '/admin/content/services',
+      color: 'bg-green-500/10 text-green-600',
+    },
+  ];
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Welcome Section */}
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-muted-foreground mt-1">
           Welcome back! Here&apos;s an overview of your website.
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Gallery Images</CardTitle>
-            <Images className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.galleryCount}</div>
-            <Link href="/admin/gallery">
-              <Button variant="link" className="px-0 text-xs">
-                Manage gallery &rarr;
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">New Enquiries</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.newInquiries}</div>
-            <p className="text-xs text-muted-foreground">
-              {stats.inquiryCount} total enquiries
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Testimonials</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.testimonialCount}</div>
-            <Link href="/admin/content/testimonials">
-              <Button variant="link" className="px-0 text-xs">
-                Manage testimonials &rarr;
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Services</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.serviceCount}</div>
-            <Link href="/admin/content/services">
-              <Button variant="link" className="px-0 text-xs">
-                Manage services &rarr;
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
+      {/* Stats Grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {statCards.map((stat) => (
+          <Link key={stat.title} href={stat.href}>
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/30 cursor-pointer rounded-2xl border-border/50">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className={`p-3 rounded-xl ${stat.color}`}>
+                    <stat.icon className="h-5 w-5" />
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="mt-4">
+                  <p className="text-3xl font-bold">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{stat.title}</p>
+                  {stat.subtitle && (
+                    <p className="text-xs text-muted-foreground/70">{stat.subtitle}</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
       </div>
 
       {/* Recent Enquiries */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Enquiries</CardTitle>
+      <Card className="rounded-2xl border-border/50">
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-xl">Recent Enquiries</CardTitle>
+            <Link href="/admin/inquiries">
+              <Button variant="ghost" size="sm" className="gap-1 text-primary hover:text-primary hover:bg-primary/10 rounded-full">
+                View all
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </CardHeader>
         <CardContent>
           {recentInquiries.length === 0 ? (
-            <p className="text-muted-foreground text-sm">No enquiries yet.</p>
+            <div className="text-center py-8">
+              <Mail className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
+              <p className="text-muted-foreground text-sm">No enquiries yet.</p>
+            </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {recentInquiries.map((inquiry) => (
                 <div
                   key={inquiry.id}
-                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                  className="flex items-center justify-between p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
                 >
-                  <div>
-                    <p className="font-medium">{inquiry.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {inquiry.phone} {inquiry.email && `• ${inquiry.email}`}
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                      {inquiry.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">{inquiry.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {inquiry.phone}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`px-2 py-1 text-xs rounded-full ${
-                        inquiry.status === 'new'
-                          ? 'bg-blue-100 text-blue-700'
-                          : inquiry.status === 'contacted'
-                          ? 'bg-yellow-100 text-yellow-700'
-                          : inquiry.status === 'booked'
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-gray-100 text-gray-700'
-                      }`}
-                    >
-                      {inquiry.status}
-                    </span>
-                  </div>
+                  <span
+                    className={`px-3 py-1.5 text-xs font-medium rounded-full ${
+                      inquiry.status === 'new'
+                        ? 'bg-blue-100 text-blue-700'
+                        : inquiry.status === 'contacted'
+                        ? 'bg-yellow-100 text-yellow-700'
+                        : inquiry.status === 'booked'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    {inquiry.status}
+                  </span>
                 </div>
               ))}
             </div>
           )}
-          <Link href="/admin/inquiries" className="block mt-4">
-            <Button variant="outline" className="w-full">
-              View all enquiries
-            </Button>
-          </Link>
         </CardContent>
       </Card>
     </div>

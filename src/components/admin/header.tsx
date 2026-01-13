@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { LogOut, User, ExternalLink } from 'lucide-react';
+import { LogOut, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 interface AdminHeaderProps {
@@ -29,30 +29,30 @@ export function AdminHeader({ username = 'Admin' }: AdminHeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/50 bg-background/95 backdrop-blur-sm px-6">
       <div className="flex items-center gap-4 lg:pl-0 pl-12">
-        <h1 className="text-lg font-semibold">Raju&apos;s Impressions</h1>
+        <h1 className="text-lg font-semibold text-foreground">Admin Panel</h1>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <Link href="/" target="_blank">
-          <Button variant="outline" size="sm" className="gap-2">
+          <Button variant="outline" size="sm" className="gap-2 rounded-full hover:bg-primary/10 hover:text-primary hover:border-primary/30">
             <ExternalLink className="h-4 w-4" />
-            View Site
+            <span className="hidden sm:inline">View Site</span>
           </Button>
         </Link>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-              <Avatar className="h-9 w-9">
-                <AvatarFallback className="bg-primary/10 text-primary">
+            <Button variant="ghost" className="relative h-10 w-10 rounded-full hover:bg-primary/10">
+              <Avatar className="h-10 w-10 border-2 border-primary/20">
+                <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                   {username.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuContent className="w-56 rounded-xl" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">{username}</p>
@@ -62,12 +62,7 @@ export function AdminHeader({ username = 'Admin' }: AdminHeaderProps) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2">
-              <User className="h-4 w-4" />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout} className="gap-2 text-red-600">
+            <DropdownMenuItem onClick={handleLogout} className="gap-2 text-red-600 cursor-pointer rounded-lg focus:bg-red-50 focus:text-red-600">
               <LogOut className="h-4 w-4" />
               Sign out
             </DropdownMenuItem>
