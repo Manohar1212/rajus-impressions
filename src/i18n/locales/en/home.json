@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "label": "Handcrafted Baby Impressions",
+    "title": "Memories You Can",
+    "titleHighlight": "Touch",
+    "subtitle": "Tiny hands. Tiny feet. Timeless handcrafted keepsakes.",
+    "scrollToAbout": "Scroll to about",
+    "imageAlt": "Baby impressions showcase"
+  },
+  "about": {
+    "label": "About Us",
+    "title": "Our Story",
+    "quote": "Photos let you see memories. Impressions let you",
+    "quoteHighlight": "feel",
+    "quoteSuffix": "them.",
+    "quoteAuthor": "— Raju, Founder",
+    "paragraph1": "Raju's Impressions is dedicated to preserving the most precious moments of early life — moments that pass too quickly but deserve to be remembered forever.",
+    "paragraph2": "From tiny newborn hands to delicate baby feet, we carefully capture every detail using",
+    "paragraph2Bold": "baby-safe materials",
+    "paragraph2Suffix": "and transform them into elegant, lasting artwork.",
+    "paragraph3": "Each piece is handcrafted with patience, love, and attention to detail, making every impression truly unique."
+  },
+  "features": {
+    "label": "Why Choose Us",
+    "title": "What Makes Us Special",
+    "items": [
+      {
+        "title": "Experienced Craftsmanship",
+        "description": "Every impression is created by skilled hands with years of experience."
+      },
+      {
+        "title": "Baby-Safe Process",
+        "description": "Gentle, non-toxic materials suitable even for newborns."
+      },
+      {
+        "title": "Personalized Creations",
+        "description": "Each piece is custom-made with your baby's details and optional framing."
+      },
+      {
+        "title": "All-India Delivery",
+        "description": "Secure packing and delivery to your doorstep, anywhere in India."
+      }
+    ],
+    "slideLabel": "Go to slide {number}"
+  },
+  "gallery": {
+    "label": "Portfolio",
+    "title": "Our Finest Work"
+  },
+  "services": {
+    "label": "Services",
+    "title": "Our Services",
+    "subtitle": "Each piece is a unique work of art, handcrafted with precision and love"
+  },
+  "process": {
+    "label": "How It Works",
+    "title": "Our Process",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Book",
+        "description": "Contact us via WhatsApp or phone to schedule your impression."
+      },
+      {
+        "number": "02",
+        "title": "Create",
+        "description": "We carefully take the impression using a safe and gentle method."
+      },
+      {
+        "number": "03",
+        "title": "Craft",
+        "description": "Each piece is refined, finished, and framed with care."
+      },
+      {
+        "number": "04",
+        "title": "Deliver",
+        "description": "Securely packed and delivered anywhere in India."
+      }
+    ],
+    "slideLabel": "Go to step {number}"
+  },
+  "why": {
+    "label": "The Reason",
+    "title": "Why Parents Choose Us",
+    "subtitle": "Because these moments never come back.",
+    "description": "Our impressions are not just products — they are",
+    "descriptionBold": "emotional keepsakes",
+    "descriptionSuffix": ", gifts for grandparents, and memories your child will one day hold in their own hands."
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "Words From Our Families",
+    "subtitle": "Hundreds of parents have trusted Raju's Impressions to preserve their most precious memories. Each smile, each review, and each recommendation inspires us to continue creating meaningful art."
+  },
+  "cta": {
+    "label": "Book Now",
+    "title": "Don't let these moments fade with time.",
+    "subtitle": "Create a memory you can touch, feel, and treasure forever."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "label": "Portfolio",
+    "title": "Our Gallery",
+    "subtitle": "Every impression captures a precious moment. Browse our collection of handcrafted keepsakes."
+  },
+  "categories": {
+    "all": "All",
+    "framed": "Framed",
+    "premium": "Premium",
+    "special": "Special",
+    "filterLabel": "Filter gallery by category"
+  },
+  "empty": {
+    "message": "No impressions in this category yet."
+  },
+  "lightbox": {
+    "viewImage": "View {title} in lightbox"
+  },
+  "cta": {
+    "label": "Get Started",
+    "title": "Ready to Create Yours?",
+    "subtitle": "Let us capture your baby's precious moments in a beautiful, lasting impression."
+  },
+  "loading": "Loading gallery..."
+}

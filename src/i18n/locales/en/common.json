@@ -1,0 +1,55 @@
+{
+  "brand": {
+    "name": "Raju's Impressions",
+    "tagline": "Memories You Can Touch",
+    "logoAlt": "Raju's Impressions Logo"
+  },
+  "navigation": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "menuLabel": "Toggle menu",
+    "navigationMenu": "Navigation Menu"
+  },
+  "buttons": {
+    "bookNow": "Book Now",
+    "bookAppointment": "Book Appointment",
+    "whatsapp": "WhatsApp",
+    "whatsappUs": "WhatsApp Us",
+    "phone": "Phone",
+    "viewFullCollection": "View Full Collection",
+    "goHome": "Go Home",
+    "viewGallery": "View Gallery",
+    "backToHome": "Back to Home",
+    "readReviews": "Read reviews on Google"
+  },
+  "location": {
+    "city": "Kakinada",
+    "state": "AP",
+    "fullLocation": "Kakinada, Andhra Pradesh",
+    "serviceArea": "Service: All over India",
+    "allIndiaService": "All India Service"
+  },
+  "contact": {
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "followInstagram": "Follow us on Instagram",
+    "followFacebook": "Follow us on Facebook",
+    "chatWhatsApp": "Chat on WhatsApp"
+  },
+  "trust": {
+    "families": "500+ Families",
+    "rating": "5★ Rating",
+    "allIndiaService": "All India Service"
+  },
+  "footer": {
+    "copyright": "© {year} Raju's Impressions",
+    "home": "Home",
+    "gallery": "Gallery"
+  }
+}

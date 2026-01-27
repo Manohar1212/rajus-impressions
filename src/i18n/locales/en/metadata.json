@@ -1,0 +1,40 @@
+{
+  "title": {
+    "default": "Raju's Impressions - Baby Hand & Foot Impressions | All India Delivery",
+    "template": "%s | Raju's Impressions"
+  },
+  "description": "India's most trusted baby hand & foot impression studio. Handcrafted keepsakes delivered across India. Preserve your precious moments forever with 100% handmade impressions.",
+  "keywords": [
+    "baby impressions",
+    "hand impressions",
+    "foot impressions",
+    "baby keepsakes",
+    "newborn memories",
+    "baby casting",
+    "baby molds",
+    "infant impressions",
+    "pregnancy belly casting",
+    "pet paw prints",
+    "India delivery",
+    "handcrafted keepsakes"
+  ],
+  "openGraph": {
+    "title": "Raju's Impressions - Baby Hand & Foot Impressions",
+    "description": "India's most trusted baby hand & foot impression studio. Handcrafted keepsakes delivered across India.",
+    "imageAlt": "Raju's Impressions - Beautiful baby hand and foot impressions"
+  },
+  "twitter": {
+    "title": "Raju's Impressions - Baby Hand & Foot Impressions",
+    "description": "India's most trusted baby hand & foot impression studio. Handcrafted keepsakes delivered across India."
+  },
+  "jsonLd": {
+    "name": "Raju's Impressions",
+    "description": "India's most trusted baby hand & foot impression studio. Handcrafted keepsakes delivered across India."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "heading": "404",
+    "subheading": "Page Not Found",
+    "message": "Sorry, we couldn't find the page you're looking for. It might have been moved or doesn't exist."
+  }
+}

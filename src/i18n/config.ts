@@ -1,0 +1,14 @@
+export const locales = ['en', 'te'] as const;
+export type Locale = typeof locales[number];
+
+export const defaultLocale: Locale = 'en';
+
+export const localeNames: Record<Locale, string> = {
+  en: 'English',
+  te: 'తెలుగు', // Telugu
+};
+
+export const localeShortNames: Record<Locale, string> = {
+  en: 'EN',
+  te: 'తె',
+};
