@@ -87,18 +87,20 @@ export function Navigation() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-500 ease-out ${
         useScrolledStyle
-          ? "py-3 backdrop-blur-2xl border-b shadow-lg"
+          ? "py-3 border-b"
           : "py-4 md:py-5 bg-transparent"
       }`}
       style={{
-        backgroundColor: useScrolledStyle ? 'rgba(255, 255, 255, 0.7)' : 'transparent',
-        borderColor: useScrolledStyle ? 'rgba(255, 255, 255, 0.18)' : 'transparent',
+        backgroundColor: useScrolledStyle ? 'hsl(var(--cream) / 0.97)' : 'transparent',
+        borderColor: useScrolledStyle ? 'hsl(var(--border))' : 'transparent',
+        backdropFilter: useScrolledStyle ? 'blur(20px) saturate(1.3)' : 'none',
+        WebkitBackdropFilter: useScrolledStyle ? 'blur(20px) saturate(1.3)' : 'none',
         boxShadow: useScrolledStyle
-          ? '0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 -1px 0 0 rgba(255, 255, 255, 0.3)'
+          ? '0 1px 2px rgba(0, 0, 0, 0.03), 0 8px 32px -8px rgba(0, 0, 0, 0.08)'
           : 'none',
         transitionProperty: 'padding, background-color, border-color, box-shadow, backdrop-filter',
-        transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-        willChange: isScrolling ? 'transform, background-color, border-color, backdrop-filter' : 'auto'
+        transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        willChange: isScrolling ? 'transform, background-color, border-color' : 'auto'
       }}
     >
       <div className="container max-w-7xl px-6">
@@ -128,7 +130,7 @@ export function Navigation() {
           {/* Desktop Navigation - Minimal & Elegant */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex items-center gap-8"
+            className="hidden lg:flex items-center gap-10"
           >
             {navItems.map((item) => {
               const isActive =
@@ -169,24 +171,28 @@ export function Navigation() {
                   key={item.name}
                   href={item.href}
                   onClick={handleClick}
-                  className={`relative text-[13px] uppercase tracking-wider font-medium transition-all duration-300 ease-out py-1 ${
+                  className={`relative text-[13px] uppercase tracking-wider font-medium transition-all duration-300 ease-out py-2 ${
                     isActive
                       ? useScrolledStyle
-                        ? "text-foreground"
+                        ? "text-primary"
                         : "text-white"
                       : useScrolledStyle
-                        ? "text-muted-foreground hover:text-foreground"
-                        : "text-white/60 hover:text-white"
+                        ? "text-muted-foreground hover:text-primary"
+                        : "text-white/70 hover:text-white"
                   }`}
                   style={{ transitionProperty: 'color, opacity' }}
                 >
                   {item.name}
-                  {/* Underline indicator */}
+                  {/* Gold underline indicator */}
                   <span
-                    className={`absolute bottom-0 left-0 h-px bg-current transition-all duration-500 ease-out ${
-                      isActive ? "w-full" : "w-0"
+                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[3px] rounded-full transition-all duration-500 ease-out ${
+                      isActive ? "w-5 opacity-100" : "w-0 opacity-0"
                     }`}
-                    style={{ transitionProperty: 'width, opacity', transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
+                    style={{
+                      background: 'hsl(var(--gold))',
+                      transitionProperty: 'width, opacity',
+                      transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)'
+                    }}
                   />
                 </Link>
               )
@@ -198,8 +204,9 @@ export function Navigation() {
             <LanguageSwitcher variant="desktop" useScrolledStyle={useScrolledStyle} />
             <Button
               asChild
+              variant="clay"
               size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 rounded-none text-[13px] uppercase tracking-wider font-medium btn-luxury"
+              className="h-10 px-6 text-[12px] uppercase tracking-wider"
             >
               <a href={socialMedia.phone.url}>
                 {t('navigation.bookNow')}
@@ -224,17 +231,17 @@ export function Navigation() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] p-0 border-l border-border/20 bg-background">
+              <SheetContent side="right" className="w-[300px] p-0 border-l border-border/10 bg-background">
                 <SheetTitle className="sr-only">{t('navigation.navigationMenu')}</SheetTitle>
                 <div className="flex flex-col h-full">
                   {/* Mobile Header */}
-                  <div className="flex items-center justify-between px-5 py-5 border-b border-border/20">
+                  <div className="flex items-center justify-between px-6 py-6 border-b border-border/10">
                     <Image
                       src="/rajus-impressions.png"
                       alt={t('brand.logoAlt')}
-                      width={120}
-                      height={28}
-                      className="object-contain h-7 w-auto"
+                      width={130}
+                      height={32}
+                      className="object-contain h-8 w-auto"
                       quality={90}
                     />
                   </div>
@@ -243,7 +250,7 @@ export function Navigation() {
                   <LanguageSwitcher variant="mobile" />
 
                   {/* Mobile Navigation Links */}
-                  <nav aria-label="Mobile navigation" className="flex flex-col px-5 py-4 flex-1 gap-1">
+                  <nav aria-label="Mobile navigation" className="flex flex-col px-6 py-6 flex-1 gap-0.5">
                     {navItems.map((item) => {
                       const isActive =
                         pathname === "/gallery"
@@ -293,7 +300,7 @@ export function Navigation() {
                         >
                           {/* Active indicator */}
                           {isActive && (
-                            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full" />
+                            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[hsl(var(--gold))] rounded-r-full" />
                           )}
                           {item.name}
                         </Link>
@@ -302,10 +309,11 @@ export function Navigation() {
                   </nav>
 
                   {/* Mobile CTA Buttons */}
-                  <div className="px-5 py-5 border-t border-border/20 space-y-3">
+                  <div className="px-6 py-6 border-t border-border/10 space-y-3">
                     <Button
                       asChild
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 rounded-none text-sm uppercase tracking-wider font-medium"
+                      variant="clay"
+                      className="w-full h-12 text-sm uppercase tracking-wider"
                     >
                       <a href={socialMedia.phone.url} onClick={() => setMobileMenuOpen(false)}>
                         <Phone className="h-4 w-4 mr-2" />
@@ -314,8 +322,8 @@ export function Navigation() {
                     </Button>
                     <Button
                       asChild
-                      variant="outline"
-                      className="w-full border-border h-12 rounded-none text-sm uppercase tracking-wider font-medium hover:bg-[hsl(var(--whatsapp))]/10 hover:border-[hsl(var(--whatsapp))] hover:text-[hsl(var(--whatsapp))]"
+                      variant="clay-outline"
+                      className="w-full h-12 text-sm uppercase tracking-wider hover:bg-[hsl(var(--whatsapp))]/10 hover:border-[hsl(var(--whatsapp))] hover:text-[hsl(var(--whatsapp))]"
                     >
                       <a
                         href={socialMedia.whatsapp.url}

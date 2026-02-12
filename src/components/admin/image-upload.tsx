@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { Upload, X, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { parseHelpers } from '@/lib/parse';
 
 interface ImageUploadProps {
@@ -22,12 +21,10 @@ export function ImageUpload({ value, onChange, disabled }: ImageUploadProps) {
       setUploading(true);
 
       try {
-        // Generate unique filename
         const timestamp = Date.now();
         const extension = file.name.split('.').pop();
         const filename = `impression-${timestamp}.${extension}`;
 
-        // Upload to Parse
         const url = await parseHelpers.uploadFile(file, filename);
         onChange(url);
       } catch (error) {
@@ -53,10 +50,14 @@ export function ImageUpload({ value, onChange, disabled }: ImageUploadProps) {
 
   return (
     <div
-      className={`relative border-2 border-dashed rounded-lg transition-colors ${
-        dragOver ? 'border-primary bg-primary/5' : 'border-border'
+      className={`relative border-2 border-dashed rounded-xl transition-all duration-200 ${
+        dragOver
+          ? 'border-[hsl(var(--admin-gold))] bg-[hsl(var(--admin-gold)_/_0.03)] scale-[1.01]'
+          : 'border-[hsl(var(--admin-border))]'
       } ${value ? 'aspect-[4/3]' : 'aspect-video'} ${
-        disabled ? 'opacity-50 cursor-not-allowed' : ''
+        disabled
+          ? 'opacity-50 cursor-not-allowed'
+          : 'hover:border-[hsl(var(--admin-border)_/_0.8)]'
       }`}
       onDragOver={(e) => {
         e.preventDefault();
@@ -71,17 +72,15 @@ export function ImageUpload({ value, onChange, disabled }: ImageUploadProps) {
             src={value}
             alt="Uploaded image"
             fill
-            className="object-cover rounded-lg"
+            className="object-cover rounded-xl"
           />
           {!disabled && (
-            <Button
-              size="icon"
-              variant="destructive"
-              className="absolute top-2 right-2 h-8 w-8"
+            <button
+              className="absolute top-2 right-2 h-8 w-8 rounded-lg bg-red-500/80 hover:bg-red-500 text-white flex items-center justify-center shadow-md transition-colors"
               onClick={() => onChange('')}
             >
               <X className="h-4 w-4" />
-            </Button>
+            </button>
           )}
         </>
       ) : (
@@ -91,14 +90,19 @@ export function ImageUpload({ value, onChange, disabled }: ImageUploadProps) {
           }`}
         >
           {uploading ? (
-            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            <div className="flex flex-col items-center gap-2">
+              <Loader2 className="h-7 w-7 animate-spin text-[hsl(var(--admin-gold))]" />
+              <span className="text-xs text-[hsl(var(--admin-text-muted))]">Uploading...</span>
+            </div>
           ) : (
             <>
-              <Upload className="h-8 w-8 text-muted-foreground mb-2" />
-              <span className="text-sm text-muted-foreground">
+              <div className="w-12 h-12 rounded-xl bg-[hsl(var(--admin-surface-2))] flex items-center justify-center mb-3">
+                <Upload className="h-5 w-5 text-[hsl(var(--admin-text-faint))]" />
+              </div>
+              <span className="text-sm text-[hsl(var(--admin-text-muted))] font-medium">
                 Drag & drop or click to upload
               </span>
-              <span className="text-xs text-muted-foreground mt-1">
+              <span className="text-xs text-[hsl(var(--admin-text-faint))] mt-1">
                 PNG, JPG, WEBP up to 5MB
               </span>
             </>

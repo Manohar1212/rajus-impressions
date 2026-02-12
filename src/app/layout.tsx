@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Sora, Cormorant_Garamond, Caveat } from "next/font/google";
 import "./globals.css";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { I18nProvider } from "@/providers/i18n-provider";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
@@ -138,7 +146,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased overflow-x-hidden`}
+        className={`${sora.variable} ${cormorant.variable} ${caveat.variable} antialiased overflow-x-hidden`}
       >
         <I18nProvider>
           {children}

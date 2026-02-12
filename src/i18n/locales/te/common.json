@@ -1,51 +1,51 @@
 {
   "brand": {
     "name": "రాజు ఇంప్రెషన్స్",
-    "tagline": "మీరు తాకగలిగే జ్ఞాపకాలు",
+    "tagline": "తాకగలిగే జ్ఞాపకాలు",
     "logoAlt": "రాజు ఇంప్రెషన్స్ లోగో"
   },
   "navigation": {
     "home": "హోమ్",
     "gallery": "గ్యాలరీ",
-    "services": "సర్వీసులు",
-    "testimonials": "రివ్యూలు",
-    "contact": "కాంటాక్ట్",
+    "services": "సేవలు",
+    "testimonials": "అనుభవాలు",
+    "contact": "సంప్రదించండి",
     "bookNow": "బుక్ చేయండి",
     "menuLabel": "మెనూ",
     "navigationMenu": "మెనూ"
   },
   "buttons": {
     "bookNow": "బుక్ చేయండి",
-    "bookAppointment": "అపాయింట్మెంట్ బుక్ చేయండి",
-    "whatsapp": "వాట్సప్",
-    "whatsappUs": "వాట్సప్ చేయండి",
+    "bookAppointment": "అపాయింట్‌మెంట్ బుక్ చేయండి",
+    "whatsapp": "WhatsApp",
+    "whatsappUs": "WhatsApp చేయండి",
     "phone": "ఫోన్",
     "viewFullCollection": "అన్నీ చూడండి",
-    "goHome": "హోమ్‌కు వెళ్ళండి",
+    "goHome": "హోమ్‌కి వెళ్ళండి",
     "viewGallery": "గ్యాలరీ చూడండి",
-    "backToHome": "హోమ్‌కు వెళ్ళండి",
-    "readReviews": "గూగుల్ రివ్యూలు చూడండి"
+    "backToHome": "హోమ్‌కి వెళ్ళండి",
+    "readReviews": "Google రివ్యూలు చూడండి"
   },
   "location": {
     "city": "కాకినాడ",
     "state": "ఆంధ్రప్రదేశ్",
     "fullLocation": "కాకినాడ, ఆంధ్రప్రదేశ్",
-    "serviceArea": "సర్వీస్: ఇండియా అంతా",
-    "allIndiaService": "ఇండియా అంతా సర్వీస్"
+    "serviceArea": "సేవ: భారతదేశం అంతటా",
+    "allIndiaService": "భారతదేశం అంతటా సేవ"
   },
   "contact": {
     "phone": "ఫోన్",
-    "whatsapp": "వాట్సప్",
-    "instagram": "ఇన్‌స్టాగ్రామ్",
-    "facebook": "ఫేస్‌బుక్",
-    "followInstagram": "ఇన్‌స్టాలో ఫాలో అవ్వండి",
-    "followFacebook": "ఫేస్‌బుక్‌లో ఫాలో అవ్వండి",
-    "chatWhatsApp": "వాట్సప్‌లో మాట్లాడండి"
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "followInstagram": "Instagramలో ఫాలో అవ్వండి",
+    "followFacebook": "Facebookలో ఫాలో అవ్వండి",
+    "chatWhatsApp": "WhatsAppలో మాట్లాడండి"
   },
   "trust": {
-    "families": "500+ ఫ్యామిలీలు",
+    "families": "500+ కుటుంబాలు",
     "rating": "5★ రేటింగ్",
-    "allIndiaService": "ఇండియా అంతా సర్వీస్"
+    "allIndiaService": "భారతదేశం అంతటా సేవ"
   },
   "footer": {
     "copyright": "© {year} రాజు ఇంప్రెషన్స్",

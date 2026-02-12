@@ -28,6 +28,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 100],

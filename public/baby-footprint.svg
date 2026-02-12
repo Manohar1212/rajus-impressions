@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 340" fill="#FFFFFF">
+  <!-- Baby footprint - realistic silhouette with proper organic curves -->
+  <!-- Sole of foot -->
+  <path d="M100,330 C60,330 30,300 25,260 C20,220 30,180 40,150 C50,120 55,100 60,85 C65,70 75,60 85,55 C95,50 105,50 115,55 C125,60 135,70 140,85 C145,100 150,120 160,150 C170,180 180,220 175,260 C170,300 140,330 100,330Z" opacity="0.95"/>
+  <!-- Big toe -->
+  <ellipse cx="68" cy="38" rx="18" ry="22" transform="rotate(-15 68 38)" opacity="0.9"/>
+  <!-- Second toe -->
+  <ellipse cx="100" cy="25" rx="15" ry="20" opacity="0.9"/>
+  <!-- Third toe -->
+  <ellipse cx="128" cy="30" rx="14" ry="18" transform="rotate(8 128 30)" opacity="0.9"/>
+  <!-- Fourth toe -->
+  <ellipse cx="150" cy="42" rx="12" ry="16" transform="rotate(18 150 42)" opacity="0.9"/>
+  <!-- Pinky toe -->
+  <ellipse cx="166" cy="60" rx="10" ry="14" transform="rotate(28 166 60)" opacity="0.9"/>
+</svg>

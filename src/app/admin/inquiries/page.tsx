@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { parseHelpers, InquiryData } from '@/lib/parse';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import {
   Select,
@@ -26,14 +24,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Phone, Mail, MessageSquare, Calendar } from 'lucide-react';
 
 const statusOptions = [
-  { value: 'new', label: 'New', color: 'bg-blue-100 text-blue-700' },
-  { value: 'contacted', label: 'Contacted', color: 'bg-yellow-100 text-yellow-700' },
-  { value: 'booked', label: 'Booked', color: 'bg-green-100 text-green-700' },
-  { value: 'completed', label: 'Completed', color: 'bg-gray-100 text-gray-700' },
+  { value: 'new', label: 'New', color: '210 80% 55%', bgTint: '210 80% 96%' },
+  { value: 'contacted', label: 'Contacted', color: '38 85% 55%', bgTint: '38 80% 95%' },
+  { value: 'booked', label: 'Booked', color: '150 65% 45%', bgTint: '150 50% 95%' },
+  { value: 'completed', label: 'Completed', color: '260 30% 58%', bgTint: '260 30% 96%' },
 ];
 
 export default function InquiriesManagementPage() {
@@ -88,19 +85,6 @@ export default function InquiriesManagementPage() {
       ? inquiries
       : inquiries.filter((i) => i.status === statusFilter);
 
-  const getStatusBadge = (status: string) => {
-    const option = statusOptions.find((o) => o.value === status);
-    return option ? (
-      <span className={`px-2 py-1 text-xs rounded-full ${option.color}`}>
-        {option.label}
-      </span>
-    ) : (
-      <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700">
-        {status}
-      </span>
-    );
-  };
-
   const formatDate = (date?: Date) => {
     if (!date) return 'N/A';
     return new Date(date).toLocaleDateString('en-IN', {
@@ -115,7 +99,7 @@ export default function InquiriesManagementPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <Loader2 className="h-6 w-6 animate-spin text-[hsl(var(--admin-gold))]" />
       </div>
     );
   }
@@ -124,138 +108,173 @@ export default function InquiriesManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Enquiries</h1>
-          <p className="text-muted-foreground">
+          <p className="text-[11px] tracking-[0.2em] uppercase text-[hsl(var(--admin-gold-dim))]">
+            Manage
+          </p>
+          <h1 className="font-serif text-2xl text-[hsl(var(--admin-text))] mt-1">
+            Enquiries
+          </h1>
+          <p className="text-sm text-[hsl(var(--admin-text-faint))] mt-1">
             Manage customer enquiries and booking requests.
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Filter by status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              {statusOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder="Filter by status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Status</SelectItem>
+            {statusOptions.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
+      {/* Status Stats */}
+      <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
         {statusOptions.map((option) => {
           const count = inquiries.filter((i) => i.status === option.value).length;
+          const isSelected = statusFilter === option.value;
           return (
-            <Card
+            <div
               key={option.value}
-              className={`cursor-pointer transition-colors ${
-                statusFilter === option.value ? 'ring-2 ring-primary' : ''
+              className={`admin-card p-5 cursor-pointer transition-all duration-200 hover:shadow-md relative overflow-hidden ${
+                isSelected ? 'ring-1 ring-[hsl(var(--admin-gold))]' : ''
               }`}
               onClick={() =>
                 setStatusFilter(statusFilter === option.value ? 'all' : option.value)
               }
             >
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+              {/* Accent top bar */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[3px]"
+                style={{ background: `hsl(${option.color})` }}
+              />
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))] font-medium">
                   {option.label}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{count}</div>
-              </CardContent>
-            </Card>
+                </p>
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{
+                    background: `hsl(${option.color})`,
+                    boxShadow: `0 0 8px hsl(${option.color} / 0.4)`,
+                  }}
+                />
+              </div>
+              <p className="text-3xl font-bold text-[hsl(var(--admin-text))]">{count}</p>
+            </div>
           );
         })}
       </div>
 
-      {/* Inquiries Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            {statusFilter === 'all' ? 'All Enquiries' : `${statusFilter} Enquiries`} (
-            {filteredInquiries.length})
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {filteredInquiries.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
-              <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No enquiries found.</p>
+      {/* Enquiries Table */}
+      <div className="admin-card overflow-hidden">
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-[hsl(var(--admin-border-subtle))]">
+          <div className="w-8 h-8 rounded-lg bg-[hsl(var(--admin-gold)_/_0.1)] flex items-center justify-center">
+            <Mail className="h-4 w-4 text-[hsl(var(--admin-gold))]" />
+          </div>
+          <h2 className="text-sm font-medium text-[hsl(var(--admin-text))]">
+            {statusFilter === 'all'
+              ? 'All Enquiries'
+              : `${statusOptions.find((s) => s.value === statusFilter)?.label} Enquiries`}{' '}
+            ({filteredInquiries.length})
+          </h2>
+        </div>
+
+        {filteredInquiries.length === 0 ? (
+          <div className="text-center py-16 px-6">
+            <div className="w-14 h-14 rounded-xl bg-[hsl(var(--admin-surface-2))] flex items-center justify-center mx-auto mb-3">
+              <MessageSquare className="h-6 w-6 text-[hsl(var(--admin-text-faint))]" />
             </div>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Contact</TableHead>
-                  <TableHead>Service</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead className="w-24">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredInquiries.map((inquiry) => (
-                  <TableRow key={inquiry.id}>
-                    <TableCell className="font-medium">{inquiry.name}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1 text-sm">
-                          <Phone className="h-3 w-3" />
-                          {inquiry.phone}
-                        </div>
-                        {inquiry.email && (
-                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                            <Mail className="h-3 w-3" />
-                            {inquiry.email}
-                          </div>
-                        )}
+            <p className="text-sm text-[hsl(var(--admin-text-muted))]">No enquiries found</p>
+          </div>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Contact</TableHead>
+                <TableHead>Service</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead className="w-24">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredInquiries.map((inquiry) => (
+                <TableRow key={inquiry.id}>
+                  <TableCell className="font-medium text-sm text-[hsl(var(--admin-text))]">
+                    {inquiry.name}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 text-sm text-[hsl(var(--admin-text-muted))]">
+                        <Phone className="h-3 w-3 text-[hsl(var(--admin-text-faint))]" />
+                        {inquiry.phone}
                       </div>
-                    </TableCell>
-                    <TableCell>{inquiry.service || '-'}</TableCell>
-                    <TableCell>{getStatusBadge(inquiry.status)}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {formatDate(inquiry.createdAt)}
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleViewInquiry(inquiry)}
-                      >
-                        View
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardContent>
-      </Card>
+                      {inquiry.email && (
+                        <div className="flex items-center gap-1.5 text-xs text-[hsl(var(--admin-text-faint))]">
+                          <Mail className="h-3 w-3" />
+                          {inquiry.email}
+                        </div>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-sm text-[hsl(var(--admin-text-muted))]">
+                    {inquiry.service || '-'}
+                  </TableCell>
+                  <TableCell>
+                    <span className={`admin-status-pill admin-status-${inquiry.status}`}>
+                      {inquiry.status}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-xs text-[hsl(var(--admin-text-faint))]">
+                    {formatDate(inquiry.createdAt)}
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      onClick={() => handleViewInquiry(inquiry)}
+                      className="h-8 px-4 rounded-lg text-xs font-medium bg-[hsl(var(--admin-gold)_/_0.1)] border border-[hsl(var(--admin-gold)_/_0.25)] text-[hsl(38_55%_35%)] hover:bg-[hsl(var(--admin-gold)_/_0.2)] hover:border-[hsl(var(--admin-gold)_/_0.4)] transition-all"
+                    >
+                      View
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </div>
 
       {/* Inquiry Detail Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Enquiry Details</DialogTitle>
+            <DialogTitle className="font-serif text-xl text-[hsl(var(--admin-text))]">
+              Enquiry Details
+            </DialogTitle>
           </DialogHeader>
           {selectedInquiry && (
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-muted-foreground">Name</Label>
-                  <p className="font-medium">{selectedInquiry.name}</p>
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Name
+                  </Label>
+                  <p className="font-medium text-sm mt-1 text-[hsl(var(--admin-text))]">
+                    {selectedInquiry.name}
+                  </p>
                 </div>
                 <div>
-                  <Label className="text-muted-foreground">Date</Label>
-                  <p className="font-medium flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Date
+                  </Label>
+                  <p className="font-medium text-sm mt-1 flex items-center gap-1.5 text-[hsl(var(--admin-text))]">
+                    <Calendar className="h-3.5 w-3.5 text-[hsl(var(--admin-text-faint))]" />
                     {formatDate(selectedInquiry.createdAt)}
                   </p>
                 </div>
@@ -263,22 +282,26 @@ export default function InquiriesManagementPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-muted-foreground">Phone</Label>
-                  <p className="font-medium flex items-center gap-1">
-                    <Phone className="h-4 w-4" />
-                    <a href={`tel:${selectedInquiry.phone}`} className="text-primary">
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Phone
+                  </Label>
+                  <p className="font-medium text-sm mt-1 flex items-center gap-1.5">
+                    <Phone className="h-3.5 w-3.5 text-[hsl(var(--admin-text-faint))]" />
+                    <a href={`tel:${selectedInquiry.phone}`} className="text-[hsl(var(--admin-gold))] hover:underline">
                       {selectedInquiry.phone}
                     </a>
                   </p>
                 </div>
                 {selectedInquiry.email && (
                   <div>
-                    <Label className="text-muted-foreground">Email</Label>
-                    <p className="font-medium flex items-center gap-1">
-                      <Mail className="h-4 w-4" />
+                    <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                      Email
+                    </Label>
+                    <p className="font-medium text-sm mt-1 flex items-center gap-1.5">
+                      <Mail className="h-3.5 w-3.5 text-[hsl(var(--admin-text-faint))]" />
                       <a
                         href={`mailto:${selectedInquiry.email}`}
-                        className="text-primary"
+                        className="text-[hsl(var(--admin-gold))] hover:underline"
                       >
                         {selectedInquiry.email}
                       </a>
@@ -289,21 +312,29 @@ export default function InquiriesManagementPage() {
 
               {selectedInquiry.service && (
                 <div>
-                  <Label className="text-muted-foreground">Service Interest</Label>
-                  <p className="font-medium">{selectedInquiry.service}</p>
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Service Interest
+                  </Label>
+                  <p className="font-medium text-sm mt-1 text-[hsl(var(--admin-text))]">
+                    {selectedInquiry.service}
+                  </p>
                 </div>
               )}
 
               <div>
-                <Label className="text-muted-foreground">Message</Label>
-                <p className="p-3 bg-muted rounded-lg text-sm">
+                <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                  Message
+                </Label>
+                <p className="p-4 bg-[hsl(var(--admin-surface-2))] rounded-xl text-sm mt-2 leading-relaxed border border-[hsl(var(--admin-border-subtle))] text-[hsl(var(--admin-text-muted))]">
                   {selectedInquiry.message}
                 </p>
               </div>
 
-              <div className="border-t pt-4 space-y-4">
+              <div className="border-t border-[hsl(var(--admin-border-subtle))] pt-5 space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="status">Update Status</Label>
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Update Status
+                  </Label>
                   <Select value={newStatus} onValueChange={setNewStatus}>
                     <SelectTrigger>
                       <SelectValue />
@@ -319,36 +350,42 @@ export default function InquiriesManagementPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="notes">Notes (internal)</Label>
-                  <Textarea
-                    id="notes"
+                  <Label className="text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--admin-text-faint))]">
+                    Notes (internal)
+                  </Label>
+                  <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="Add notes about this enquiry..."
                     rows={3}
                     disabled={saving}
+                    className="w-full px-4 py-3 rounded-xl bg-[hsl(var(--admin-surface-2))] border border-[hsl(var(--admin-border))] text-[hsl(var(--admin-text))] text-sm placeholder:text-[hsl(var(--admin-text-faint))] focus:outline-none focus:border-[hsl(var(--admin-gold-dim))] focus:ring-1 focus:ring-[hsl(var(--admin-gold)_/_0.15)] transition-all resize-none disabled:opacity-50"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2">
-                <Button
-                  variant="outline"
+              <div className="flex justify-end gap-3 pt-2">
+                <button
                   onClick={() => setDialogOpen(false)}
                   disabled={saving}
+                  className="h-10 px-5 rounded-xl bg-white border border-[hsl(30_8%_82%)] text-[hsl(25_20%_25%)] text-sm font-medium hover:bg-[hsl(30_10%_96%)] hover:border-[hsl(30_8%_72%)] transition-colors disabled:opacity-50"
                 >
                   Cancel
-                </Button>
-                <Button onClick={handleUpdateInquiry} disabled={saving}>
+                </button>
+                <button
+                  onClick={handleUpdateInquiry}
+                  disabled={saving}
+                  className="h-10 px-6 rounded-xl bg-[hsl(38_55%_45%)] hover:bg-[hsl(38_55%_38%)] text-white text-sm font-semibold shadow-md shadow-[hsl(38_55%_45%_/_0.3)] transition-all duration-300 disabled:opacity-50 flex items-center gap-2"
+                >
                   {saving ? (
                     <>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                       Saving...
                     </>
                   ) : (
                     'Save Changes'
                   )}
-                </Button>
+                </button>
               </div>
             </div>
           )}

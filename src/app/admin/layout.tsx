@@ -15,8 +15,6 @@ export default function AdminLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState('Admin');
-
   useEffect(() => {
     const checkAuth = async () => {
       // Skip auth check for login page
@@ -31,10 +29,6 @@ export default function AdminLayout({
         if (!isAuthenticated) {
           router.push('/admin/login');
         } else {
-          const user = parseHelpers.getCurrentUser();
-          if (user) {
-            setUsername(user.get('username') || 'Admin');
-          }
           setLoading(false);
         }
       } catch (error) {
@@ -63,18 +57,39 @@ export default function AdminLayout({
   // Show loading state while checking auth
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="admin-dark min-h-screen flex items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin text-[hsl(var(--admin-gold))]" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
+    <div className="admin-dark admin-grain min-h-screen relative">
       <AdminSidebar />
-      <div className="lg:pl-72">
-        <AdminHeader username={username} />
-        <main className="p-6 lg:p-8">{children}</main>
+      <div className="lg:pl-64 relative z-10 min-h-screen">
+        <AdminHeader />
+        <main
+          className="admin-content px-6 lg:px-10 py-8 min-h-[calc(100vh-90px)]"
+          style={{
+            '--admin-bg': '0 0% 97%',
+            '--admin-surface': '0 0% 100%',
+            '--admin-surface-2': '30 10% 96%',
+            '--admin-surface-3': '30 8% 93%',
+            '--admin-border': '30 8% 88%',
+            '--admin-border-subtle': '30 8% 92%',
+            '--admin-text': '25 20% 13%',
+            '--admin-text-muted': '25 10% 45%',
+            '--admin-text-faint': '25 8% 62%',
+            '--admin-gold': '38 55% 45%',
+            '--admin-gold-dim': '38 35% 35%',
+            '--admin-rose-dim': '340 15% 92%',
+            background: 'hsl(0 0% 97%)',
+            color: 'hsl(25 20% 13%)',
+            colorScheme: 'light',
+          } as React.CSSProperties}
+        >
+          <div className="max-w-[1400px]">{children}</div>
+        </main>
       </div>
     </div>
   );

@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { parseHelpers } from '@/lib/parse';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Images, Mail, Star, FileText, Loader2, ArrowRight } from 'lucide-react';
+import { Images, Mail, Star, FileText, Loader2, ArrowRight, Clock } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 
 interface DashboardStats {
   galleryCount: number;
@@ -58,18 +56,19 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <Loader2 className="h-6 w-6 animate-spin text-[hsl(var(--admin-gold))]" />
       </div>
     );
   }
 
   const statCards = [
     {
-      title: 'Gallery Images',
+      title: 'Gallery',
       value: stats.galleryCount,
       icon: Images,
       href: '/admin/gallery',
-      color: 'bg-primary/10 text-primary',
+      accent: 'hsl(var(--admin-gold))',
+      accentDim: 'hsl(var(--admin-gold)_/_0.1)',
     },
     {
       title: 'New Enquiries',
@@ -77,31 +76,46 @@ export default function AdminDashboard() {
       subtitle: `${stats.inquiryCount} total`,
       icon: Mail,
       href: '/admin/inquiries',
-      color: 'bg-blue-500/10 text-blue-600',
+      accent: 'hsl(200 60% 55%)',
+      accentDim: 'hsl(200 60% 55%_/_0.1)',
     },
     {
       title: 'Testimonials',
       value: stats.testimonialCount,
       icon: Star,
       href: '/admin/content/testimonials',
-      color: 'bg-yellow-500/10 text-yellow-600',
+      accent: 'hsl(38 55% 55%)',
+      accentDim: 'hsl(38 55% 55%_/_0.1)',
     },
     {
       title: 'Services',
       value: stats.serviceCount,
       icon: FileText,
       href: '/admin/content/services',
-      color: 'bg-green-500/10 text-green-600',
+      accent: 'hsl(160 45% 45%)',
+      accentDim: 'hsl(160 45% 45%_/_0.1)',
     },
   ];
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  };
+
   return (
     <div className="space-y-8">
-      {/* Welcome Section */}
+      {/* Greeting */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground mt-1">
-          Welcome back! Here&apos;s an overview of your website.
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[hsl(var(--admin-gold-dim))]">
+          {getGreeting()}
+        </p>
+        <h1 className="font-serif text-2xl text-[hsl(var(--admin-text))] mt-1">
+          Welcome back
+        </h1>
+        <p className="text-sm text-[hsl(var(--admin-text-faint))] mt-1">
+          Here&apos;s an overview of your studio.
         </p>
       </div>
 
@@ -109,81 +123,90 @@ export default function AdminDashboard() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
         {statCards.map((stat) => (
           <Link key={stat.title} href={stat.href} className="block h-full">
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/30 cursor-pointer rounded-2xl border-border/50 h-full">
-              <CardContent className="p-6 h-full flex flex-col">
-                <div className="flex items-center justify-between">
-                  <div className={`p-3 rounded-xl ${stat.color}`}>
-                    <stat.icon className="h-5 w-5" />
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="admin-card p-6 h-full flex flex-col group cursor-pointer hover:border-[hsl(var(--admin-gold)_/_0.15)] transition-all duration-300">
+              <div className="flex items-center justify-between">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: stat.accentDim }}
+                >
+                  <stat.icon className="h-[18px] w-[18px]" style={{ color: stat.accent }} />
                 </div>
-                <div className="mt-4 flex-grow">
-                  <p className="text-3xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{stat.title}</p>
-                  <p className="text-xs text-muted-foreground/70 h-4">{stat.subtitle || ''}</p>
-                </div>
-              </CardContent>
-            </Card>
+                <ArrowRight className="h-4 w-4 text-[hsl(var(--admin-text-faint))] opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
+              </div>
+              <div className="mt-5 flex-grow">
+                <p className="text-3xl font-bold tracking-tight text-[hsl(var(--admin-text))]">
+                  {stat.value}
+                </p>
+                <p className="text-[11px] tracking-[0.1em] uppercase text-[hsl(var(--admin-text-muted))] mt-1.5">
+                  {stat.title}
+                </p>
+                <p className="text-[10px] text-[hsl(var(--admin-text-faint))] h-4 mt-0.5">
+                  {stat.subtitle || ''}
+                </p>
+              </div>
+            </div>
           </Link>
         ))}
       </div>
 
       {/* Recent Enquiries */}
-      <Card className="rounded-2xl border-border/50">
-        <CardHeader className="pb-4">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xl">Recent Enquiries</CardTitle>
-            <Link href="/admin/inquiries">
-              <Button variant="ghost" size="sm" className="gap-1 text-primary hover:text-primary hover:bg-primary/10 rounded-full">
-                View all
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+      <div className="admin-card overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[hsl(var(--admin-border-subtle))]">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[hsl(var(--admin-gold)_/_0.1)] flex items-center justify-center">
+              <Clock className="h-4 w-4 text-[hsl(var(--admin-gold))]" />
+            </div>
+            <h2 className="text-sm font-medium text-[hsl(var(--admin-text))]">
+              Recent Enquiries
+            </h2>
           </div>
-        </CardHeader>
-        <CardContent>
-          {recentInquiries.length === 0 ? (
-            <div className="text-center py-8">
-              <Mail className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
-              <p className="text-muted-foreground text-sm">No enquiries yet.</p>
+          <Link
+            href="/admin/inquiries"
+            className="flex items-center gap-1.5 text-[11px] text-[hsl(var(--admin-gold-dim))] hover:text-[hsl(var(--admin-gold))] transition-colors"
+          >
+            View all
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+
+        {recentInquiries.length === 0 ? (
+          <div className="text-center py-12 px-6">
+            <div className="w-14 h-14 rounded-xl bg-[hsl(var(--admin-surface-2))] flex items-center justify-center mx-auto mb-3">
+              <Mail className="h-6 w-6 text-[hsl(var(--admin-text-faint))]" />
             </div>
-          ) : (
-            <div className="space-y-3">
-              {recentInquiries.map((inquiry) => (
-                <div
-                  key={inquiry.id}
-                  className="flex items-center justify-between p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
-                      {inquiry.name.charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">{inquiry.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {inquiry.phone}
-                      </p>
-                    </div>
+            <p className="text-sm text-[hsl(var(--admin-text-muted))]">No enquiries yet</p>
+            <p className="text-xs text-[hsl(var(--admin-text-faint))] mt-1">
+              Enquiries from your website will appear here
+            </p>
+          </div>
+        ) : (
+          <div className="divide-y divide-[hsl(var(--admin-border-subtle)_/_0.5)]">
+            {recentInquiries.map((inquiry) => (
+              <div
+                key={inquiry.id}
+                className="flex items-center justify-between px-6 py-3.5 hover:bg-[hsl(var(--admin-surface-2)_/_0.3)] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[hsl(var(--admin-rose-dim))] flex items-center justify-center text-[hsl(var(--admin-gold))] font-semibold text-xs">
+                    {inquiry.name.charAt(0).toUpperCase()}
                   </div>
-                  <span
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full ${
-                      inquiry.status === 'new'
-                        ? 'bg-blue-100 text-blue-700'
-                        : inquiry.status === 'contacted'
-                        ? 'bg-yellow-100 text-yellow-700'
-                        : inquiry.status === 'booked'
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    {inquiry.status}
-                  </span>
+                  <div>
+                    <p className="font-medium text-sm text-[hsl(var(--admin-text))]">
+                      {inquiry.name}
+                    </p>
+                    <p className="text-xs text-[hsl(var(--admin-text-faint))] mt-0.5">
+                      {inquiry.phone}
+                    </p>
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                <span className={`admin-status-pill admin-status-${inquiry.status}`}>
+                  {inquiry.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

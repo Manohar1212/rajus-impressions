@@ -1,9 +1,14 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { WhatsAppIcon } from "@/components/icons/whatsapp"
 import { socialMedia } from "@/config/social-media"
 
 export function WhatsAppFloat() {
+  const pathname = usePathname()
+
+  if (pathname.startsWith("/admin")) return null
+
   return (
     <a
       href={socialMedia.whatsapp.url}

@@ -96,5 +96,25 @@
     "label": "Book Now",
     "title": "Don't let these moments fade with time.",
     "subtitle": "Create a memory you can touch, feel, and treasure forever."
+  },
+  "enquiryForm": {
+    "title": "Send Us an Enquiry",
+    "subtitle": "Fill in the details below and we'll get back to you shortly.",
+    "name": "Your Name",
+    "namePlaceholder": "Enter your full name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "email": "Email (Optional)",
+    "emailPlaceholder": "Enter your email address",
+    "service": "Service Interest",
+    "servicePlaceholder": "Select a service",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about the impression you'd like...",
+    "submit": "Send Enquiry",
+    "submitting": "Sending...",
+    "successTitle": "Enquiry Sent!",
+    "successMessage": "Thank you! We'll get back to you within 24 hours.",
+    "errorMessage": "Something went wrong. Please try again or contact us directly.",
+    "or": "Or reach us directly"
   }
 }
