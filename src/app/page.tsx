@@ -24,7 +24,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
 }
 
-// Custom hook for scroll reveal with GSAP
+// Custom hook for scroll reveal using IntersectionObserver
 function useScrollReveal(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -33,30 +33,18 @@ function useScrollReveal(threshold = 0.1) {
     const element = ref.current
     if (!element) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        element,
-        {
-          opacity: 0,
-          y: 40,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 85%",
-            end: "top 60%",
-            toggleActions: "play none none reverse",
-            onEnter: () => setIsVisible(true),
-          },
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(element)
         }
-      )
-    }, element)
+      },
+      { threshold, rootMargin: '0px 0px -15% 0px' }
+    )
 
-    return () => ctx.revert()
+    observer.observe(element)
+    return () => observer.disconnect()
   }, [threshold])
 
   return { ref, isVisible }
