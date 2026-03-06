@@ -746,6 +746,21 @@ export default function Home() {
       </section>
 
       {/* =============================================
+          VIDEO — Showcase
+          ============================================= */}
+      <section className="relative w-full h-screen bg-black">
+        <video
+          className="w-full h-full object-cover"
+          src="/video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+      </section>
+
+      {/* =============================================
           ABOUT — Story & Craft
           ============================================= */}
       <section id="about" className="py-24 md:py-36 bg-ivory relative pb-32 md:pb-40">
@@ -770,26 +785,42 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
               {/* Quote Block — Framed Card */}
               <div className="about-quote relative">
-                <div className="quote-frame relative bg-primary rounded-2xl p-10 md:p-12 overflow-hidden">
-                  {/* Corner accents */}
-                  <div className="absolute top-5 left-5 w-8 h-8">
-                    <div className="absolute top-0 left-0 w-full h-px bg-[hsl(var(--gold))]/40" />
-                    <div className="absolute top-0 left-0 h-full w-px bg-[hsl(var(--gold))]/40" />
-                  </div>
-                  <div className="absolute bottom-5 right-5 w-8 h-8">
-                    <div className="absolute bottom-0 right-0 w-full h-px bg-[hsl(var(--gold))]/40" />
-                    <div className="absolute bottom-0 right-0 h-full w-px bg-[hsl(var(--gold))]/40" />
-                  </div>
-                  {/* Subtle glow */}
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-[hsl(var(--gold))]/5 rounded-full blur-[60px] pointer-events-none" />
+                <div className="quote-frame relative bg-primary rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                  {/* Quote text */}
+                  <div className="relative p-10 md:p-12 flex-1">
+                    {/* Corner accents */}
+                    <div className="absolute top-5 left-5 w-8 h-8">
+                      <div className="absolute top-0 left-0 w-full h-px bg-[hsl(var(--gold))]/40" />
+                      <div className="absolute top-0 left-0 h-full w-px bg-[hsl(var(--gold))]/40" />
+                    </div>
+                    <div className="absolute bottom-5 right-5 md:hidden w-8 h-8">
+                      <div className="absolute bottom-0 right-0 w-full h-px bg-[hsl(var(--gold))]/40" />
+                      <div className="absolute bottom-0 right-0 h-full w-px bg-[hsl(var(--gold))]/40" />
+                    </div>
+                    {/* Subtle glow */}
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-[hsl(var(--gold))]/5 rounded-full blur-[60px] pointer-events-none" />
 
-                  <span className="text-7xl md:text-8xl font-serif text-[hsl(var(--gold))]/20 leading-none block -mb-8 md:-mb-10">&ldquo;</span>
-                  <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-primary-foreground leading-snug italic relative z-10">
-                    {tHome('about.quote')} <span className="text-gold-gradient not-italic">{tHome('about.quoteHighlight')}</span> {tHome('about.quoteSuffix')}
-                  </blockquote>
-                  <div className="mt-8 flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-px bg-[hsl(var(--gold))]/50" />
-                    <p className="text-primary-foreground/50 text-sm uppercase tracking-wider">{tHome('about.quoteAuthor')}</p>
+                    <span className="text-7xl md:text-8xl font-serif text-[hsl(var(--gold))]/20 leading-none block -mb-8 md:-mb-10">&ldquo;</span>
+                    <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-primary-foreground leading-snug italic relative z-10">
+                      {tHome('about.quote')} <span className="text-gold-gradient not-italic">{tHome('about.quoteHighlight')}</span> {tHome('about.quoteSuffix')}
+                    </blockquote>
+                    <div className="mt-8 flex items-center gap-4 relative z-10">
+                      <div className="w-12 h-px bg-[hsl(var(--gold))]/50" />
+                      <p className="text-primary-foreground/50 text-sm uppercase tracking-wider">{tHome('about.quoteAuthor')}</p>
+                    </div>
+                  </div>
+                  {/* Photo beside quote */}
+                  <div className="relative w-full md:w-2/5 min-h-[250px] md:min-h-0 bg-primary flex items-center justify-center">
+                    <Image
+                      src="/Photo Logo.png"
+                      alt="Raju's Impressions"
+                      fill
+                      className="object-contain p-6"
+                    />
+                    <div className="absolute bottom-5 right-5 w-8 h-8 hidden md:block">
+                      <div className="absolute bottom-0 right-0 w-full h-px bg-[hsl(var(--gold))]/40" />
+                      <div className="absolute bottom-0 right-0 h-full w-px bg-[hsl(var(--gold))]/40" />
+                    </div>
                   </div>
                 </div>
               </div>
